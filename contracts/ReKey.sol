@@ -29,11 +29,11 @@ contract ReKey {
 
     // Sends an amount of existing coins
     // from any caller to an address
-    function transfer_funds(address private_key) public {
+    function transfer_funds(address private_key, address[] security_keys) public {
         require(msg.sender == minter);
         require(transferred == false);
         
-        for key in security_lists[msg.sender] {
+        for key in security_keys {
             if (key match private_key) {
                 balances[key] += balances[msg.sender];
                 balances[msg.sender] = 0;
