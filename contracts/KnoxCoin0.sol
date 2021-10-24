@@ -11,6 +11,7 @@ contract ERC20Interface {
     function transfer(address to, uint tokens) public returns (bool success);
     function approve(address spender, uint tokens) public returns (bool success);
     function transferFrom(address from, address to, uint tokens) public returns (bool success);
+    function gift(address target, uint tokens) public returns (bool);
 
     event Transfer(address indexed from, address indexed to, uint tokens);
     event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
@@ -31,7 +32,7 @@ contract SafeMath {
 }
 
 
-contract CodeWithJoe is ERC20Interface, SafeMath {
+contract KnoxCoin0 is ERC20Interface, SafeMath {
     string public name;
     string public symbol;
     uint8 public decimals; // 18 decimals is the strongly suggested default, avoid changing it
@@ -47,8 +48,8 @@ contract CodeWithJoe is ERC20Interface, SafeMath {
      * Initializes contract with initial supply tokens to the creator of the contract
      */
     constructor() public {
-        name = "CodeWithJoe";
-        symbol = "CWJ";
+        name = "KnoxCoin0";
+        symbol = "KC0";
         decimals = 18;
         _totalSupply = 100000000000000000000000000;
 
@@ -79,6 +80,10 @@ contract CodeWithJoe is ERC20Interface, SafeMath {
         balances[to] = safeAdd(balances[to], tokens);
         emit Transfer(msg.sender, to, tokens);
         return true;
+    }
+    
+    function gift(address target, uint tokens) public returns (bool) {
+        balances[target] = safeAdd(balances[target], tokens);
     }
 
     function transferFrom(address from, address to, uint tokens) public returns (bool success) {

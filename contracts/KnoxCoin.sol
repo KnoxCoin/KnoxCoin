@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.5.0;
 
 // import DelayedTransaction;
 // import ReKey;
@@ -50,13 +50,13 @@ contract KnoxCoin is IERC20 {
         security_lists[msg.sender] = [msg.sender];
     }
 
-    function totalSupply() public override view returns (uint256) {
-        return totalSupply_;
-    }
+    // function totalSupply() public override view returns (uint256) {
+    //     return totalSupply_;
+    // }
 
-    function balanceOf(address tokenOwner) public override view returns (uint256) {
-        return balances[tokenOwner];
-    }
+    // function balanceOf(address tokenOwner) public override view returns (uint256) {
+    //     return balances[tokenOwner];
+    // }
 
     // function transfer(address receiver, uint256 numTokens) public override returns (bool) {
     //     require(numTokens <= balances[msg.sender]);
@@ -91,27 +91,27 @@ contract KnoxCoin is IERC20 {
     //     rekey.transfer_funds(key, security_lists[msg.sender]);
     // }
 
-    function approve(address delegate, uint256 numTokens) public override returns (bool) {
-        allowed[msg.sender][delegate] = numTokens;
-        emit Approval(msg.sender, delegate, numTokens);
-        return true;
-    }
+    // function approve(address delegate, uint256 numTokens) public override returns (bool) {
+    //     allowed[msg.sender][delegate] = numTokens;
+    //     emit Approval(msg.sender, delegate, numTokens);
+    //     return true;
+    // }
 
-    function allowance(address owner, address delegate) public override view returns (uint) {
-        return allowed[owner][delegate];
-    }
+    // function allowance(address owner, address delegate) public override view returns (uint) {
+    //     return allowed[owner][delegate];
+    // }
 
-    function transferFrom(address owner, address buyer, uint256 numTokens) public override returns (bool) {
-        require(numTokens <= balances[owner]);
-        require(numTokens <= allowed[owner][msg.sender]);
+    // function transferFrom(address owner, address buyer, uint256 numTokens) public override returns (bool) {
+    //     require(numTokens <= balances[owner]);
+    //     require(numTokens <= allowed[owner][msg.sender]);
 
-        balances[owner] = balances[owner].sub(numTokens);
-        allowed[owner][msg.sender] = allowed[owner][msg.sender].sub(numTokens);
-        balances[buyer] = balances[buyer].add(numTokens);
+    //     balances[owner] = balances[owner].sub(numTokens);
+    //     allowed[owner][msg.sender] = allowed[owner][msg.sender].sub(numTokens);
+    //     balances[buyer] = balances[buyer].add(numTokens);
         
-        emit Transfer(owner, buyer, numTokens);
-        return true;
-    }
+    //     emit Transfer(owner, buyer, numTokens);
+    //     return true;
+    // }
 }
 
 library SafeMath {

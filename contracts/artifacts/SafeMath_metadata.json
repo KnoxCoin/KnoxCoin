@@ -119,7 +119,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/KnoxCoin2.sol": "SafeMath"
+			"contracts/KnoxCoin0.sol": "SafeMath"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -130,11 +130,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/KnoxCoin2.sol": {
-			"keccak256": "0xaa423d3d639d64e1112d28dc5f8cf1c446c020511759c4d029e0e84acb8dda67",
+		"contracts/KnoxCoin0.sol": {
+			"keccak256": "0xdaa6637d17c082f99a08ba08706a7f5df6cb4559f5a50b9480fd4dd71fa8b978",
 			"urls": [
-				"bzz-raw://f5c3f738732e80b350c01fda3ac2a1300a86ed9dbc84633ad4d91500b67d1e5f",
-				"dweb:/ipfs/QmU6iL7CdwmQRaHm7R3YnsavF89DE4yNL1GkuVLZjHnNrU"
+				"bzz-raw://cbb1d4c65a998afb7b593ca9e0923c8ecc4f9dfbd845595dc012a689dcf14923",
+				"dweb:/ipfs/QmbxVR5NeEY3ccdiT4p3W3yVeh86hXsud4VnvvvNwZ8eka"
 			]
 		}
 	},

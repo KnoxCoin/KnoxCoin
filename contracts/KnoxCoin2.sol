@@ -12,8 +12,8 @@ contract ERC20Interface {
     function transfer(address smart_address, address receiver, uint tokens) public returns (bool success);
     function approve(address spender, uint tokens) public returns (bool success);
     function transferFrom(address from, address to, uint tokens) public returns (bool success);
-    function executeTransaction(address receiver, uint tokens) public returns (bool);
-    function cancelTransaction() public returns (bool);
+    function executeTransaction(address smart_address, address receiver, uint tokens) public returns (bool);
+    function cancelTransaction(address smart_address) public returns (bool);
     function setDelay(uint delay) public returns (bool);
     function gift(address target, uint tokens) public returns (bool);
     function current() public view returns (address);
@@ -145,14 +145,15 @@ contract KnoxCoin2 is ERC20Interface, SafeMath {
         
         DelayedTransaction dt = DelayedTransaction(smart_address);
         transactions[smart_address] = dt;
-        smart_address.call(bytes4(keccak256("init(address, uint)")), receiver, tokens);
+        smart_address.call(abi.encodeWithSignature("init(address, uint)", receiver, tokens));
         return true;
         
     }
     
-    function executeTransaction(address receiver, uint tokens) public returns (bool) {
-        DelayedTransaction dt = transactions[msg.sender];
-        bool valid = dt.move_funds(delays[msg.sender], tokens, receiver);
+    function executeTransaction(address smart_address, address receiver, uint tokens) public returns (bool) {
+        (bool success, bytes memory result) = smart_address.call(abi.encodeWithSignature("move_funds(uint, uint, address)", delays[msg.sender], tokens, receiver));
+        // emit AddedValuesByCall(a, b, success);
+        bool valid = abi.decode(result, (bool));
         if (valid) {
             balances[msg.sender] = safeSub(balances[msg.sender], tokens);
             balances[receiver] = safeAdd(balances[receiver], tokens);
@@ -162,8 +163,8 @@ contract KnoxCoin2 is ERC20Interface, SafeMath {
         return false;
     }
     
-    function cancelTransaction() public returns (bool) {
-        transactions[msg.sender].cancel_transaction();
+    function cancelTransaction(address smart_address) public returns (bool) {
+        smart_address.call(abi.encodeWithSignature("cancel_transaction()"));
         return true;
     }
     

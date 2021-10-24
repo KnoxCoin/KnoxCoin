@@ -63,10 +63,25 @@
 			},
 			{
 				"constant": true,
+				"inputs": [],
+				"name": "_totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "owner",
+						"name": "tokenOwner",
 						"type": "address"
 					},
 					{
@@ -79,7 +94,7 @@
 				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "remaining",
 						"type": "uint256"
 					}
 				],
@@ -97,7 +112,7 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "tokens",
 						"type": "uint256"
 					}
 				],
@@ -105,7 +120,7 @@
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "success",
 						"type": "bool"
 					}
 				],
@@ -118,7 +133,7 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "account",
+						"name": "tokenOwner",
 						"type": "address"
 					}
 				],
@@ -126,7 +141,7 @@
 				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "balance",
 						"type": "uint256"
 					}
 				],
@@ -150,6 +165,32 @@
 				"type": "function"
 			},
 			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "target",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokens",
+						"type": "uint256"
+					}
+				],
+				"name": "gift",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"constant": true,
 				"inputs": [],
 				"name": "name",
@@ -168,26 +209,104 @@
 				"constant": true,
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
+						"internalType": "uint256",
+						"name": "a",
+						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "b",
 						"type": "uint256"
 					}
 				],
-				"name": "security_lists",
+				"name": "safeAdd",
 				"outputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
+						"internalType": "uint256",
+						"name": "c",
+						"type": "uint256"
 					}
 				],
 				"payable": false,
-				"stateMutability": "view",
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "a",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "b",
+						"type": "uint256"
+					}
+				],
+				"name": "safeDiv",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "c",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "a",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "b",
+						"type": "uint256"
+					}
+				],
+				"name": "safeMul",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "c",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "a",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "b",
+						"type": "uint256"
+					}
+				],
+				"name": "safeSub",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "c",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "pure",
 				"type": "function"
 			},
 			{
@@ -225,12 +344,12 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "recipient",
+						"name": "to",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "tokens",
 						"type": "uint256"
 					}
 				],
@@ -238,7 +357,7 @@
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "success",
 						"type": "bool"
 					}
 				],
@@ -251,17 +370,17 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "sender",
+						"name": "from",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "recipient",
+						"name": "to",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "tokens",
 						"type": "uint256"
 					}
 				],
@@ -269,7 +388,7 @@
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "success",
 						"type": "bool"
 					}
 				],
@@ -282,12 +401,14 @@
 			"methods": {}
 		},
 		"userdoc": {
-			"methods": {}
+			"methods": {
+				"constructor": "Constrctor function     * Initializes contract with initial supply tokens to the creator of the contract"
+			}
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/KnoxCoin.sol": "KnoxCoin"
+			"contracts/KnoxCoin0.sol": "KnoxCoin0"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -298,11 +419,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/KnoxCoin.sol": {
-			"keccak256": "0xa82572163a9e2c99dc0c0730aa0ca08512287b9464e37059c9b0088a11d50f23",
+		"contracts/KnoxCoin0.sol": {
+			"keccak256": "0xdaa6637d17c082f99a08ba08706a7f5df6cb4559f5a50b9480fd4dd71fa8b978",
 			"urls": [
-				"bzz-raw://799ee4b10951264717be29df5741afe9b34afc940cf10ded405449194d16e3b4",
-				"dweb:/ipfs/QmdjQ9GXyod3EbvgSgRG2xeBRAnsGfv3AEACJjdnsSyUsk"
+				"bzz-raw://cbb1d4c65a998afb7b593ca9e0923c8ecc4f9dfbd845595dc012a689dcf14923",
+				"dweb:/ipfs/QmbxVR5NeEY3ccdiT4p3W3yVeh86hXsud4VnvvvNwZ8eka"
 			]
 		}
 	},

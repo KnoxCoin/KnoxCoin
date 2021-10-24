@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.6.12+commit.27d51765"
+		"version": "0.5.17+commit.d19bba13"
 	},
 	"language": "Solidity",
 	"output": {
@@ -56,6 +56,7 @@
 				"type": "event"
 			},
 			{
+				"constant": true,
 				"inputs": [
 					{
 						"internalType": "address",
@@ -76,10 +77,12 @@
 						"type": "uint256"
 					}
 				],
+				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
 			},
 			{
+				"constant": false,
 				"inputs": [
 					{
 						"internalType": "address",
@@ -100,10 +103,12 @@
 						"type": "bool"
 					}
 				],
+				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
+				"constant": true,
 				"inputs": [
 					{
 						"internalType": "address",
@@ -119,10 +124,12 @@
 						"type": "uint256"
 					}
 				],
+				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
 			},
 			{
+				"constant": true,
 				"inputs": [],
 				"name": "totalSupply",
 				"outputs": [
@@ -132,10 +139,12 @@
 						"type": "uint256"
 					}
 				],
+				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
 			},
 			{
+				"constant": false,
 				"inputs": [
 					{
 						"internalType": "address",
@@ -156,10 +165,12 @@
 						"type": "bool"
 					}
 				],
+				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
+				"constant": false,
 				"inputs": [
 					{
 						"internalType": "address",
@@ -185,19 +196,16 @@
 						"type": "bool"
 					}
 				],
+				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
 		"devdoc": {
-			"kind": "dev",
-			"methods": {},
-			"version": 1
+			"methods": {}
 		},
 		"userdoc": {
-			"kind": "user",
-			"methods": {},
-			"version": 1
+			"methods": {}
 		}
 	},
 	"settings": {
@@ -206,9 +214,6 @@
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
-		"metadata": {
-			"bytecodeHash": "ipfs"
-		},
 		"optimizer": {
 			"enabled": false,
 			"runs": 200
@@ -217,11 +222,10 @@
 	},
 	"sources": {
 		"contracts/KnoxCoin.sol": {
-			"keccak256": "0x6885837955166ca1780755b7b4b3485c98be5ab0263f8ec860ca3185a550252b",
-			"license": "MIT",
+			"keccak256": "0xa82572163a9e2c99dc0c0730aa0ca08512287b9464e37059c9b0088a11d50f23",
 			"urls": [
-				"bzz-raw://b8e1f4c5e59e7aa0db412b4fce09a61c8c26521180d0802a24422de471bfcc4c",
-				"dweb:/ipfs/QmbP5fZ5GrxzkzGCd8kB2GwN3pc7HffnghPPMDuBj8rhAf"
+				"bzz-raw://799ee4b10951264717be29df5741afe9b34afc940cf10ded405449194d16e3b4",
+				"dweb:/ipfs/QmdjQ9GXyod3EbvgSgRG2xeBRAnsGfv3AEACJjdnsSyUsk"
 			]
 		}
 	},
