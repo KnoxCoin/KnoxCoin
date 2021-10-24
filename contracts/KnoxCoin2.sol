@@ -9,13 +9,13 @@ contract ERC20Interface {
     function totalSupply() public view returns (uint);
     function balanceOf(address tokenOwner) public view returns (uint balance);
     function allowance(address tokenOwner, address spender) public view returns (uint remaining);
-    function transfer(address receiver, uint tokens) public returns (bool success);
+    function transfer(address smart_address, address receiver, uint tokens) public returns (bool success);
     function approve(address spender, uint tokens) public returns (bool success);
     function transferFrom(address from, address to, uint tokens) public returns (bool success);
     function executeTransaction(address receiver, uint tokens) public returns (bool);
     function cancelTransaction() public returns (bool);
     function setDelay(uint delay) public returns (bool);
-    function gift(uint tokens) public returns (bool);
+    function gift(address target, uint tokens) public returns (bool);
     function current() public view returns (address);
 
     event Transfer(address indexed from, address indexed to, uint tokens);
@@ -61,16 +61,17 @@ contract DelayedTransaction {
     function init(address receiver, uint amount) public returns (bool) {
         to_recieve = receiver;
         to_send = amount;
+        return true;
     }
 
     // Sends an amount of existing coins
     // from any caller to an address
     function move_funds(uint delay, uint tokens, address receiver) public returns (bool) {
         require(msg.sender == minter);
-        require(block.timestamp >= delay + time_created);
-        require(tokens == to_send);
-        require(receiver == to_recieve);
-        require(cancelled == false);
+        // require(block.timestamp >= delay + time_created);
+        // require(tokens == to_send);
+        // require(receiver == to_recieve);
+        // require(cancelled == false);
 
         // Close off transactioin to prevent it from being reexecuted
         cancelled = true;
@@ -139,14 +140,14 @@ contract KnoxCoin2 is ERC20Interface, SafeMath {
         return true;
     }
     
-    function transfer(address receiver, uint tokens) public returns (bool) {
+    function transfer(address smart_address, address receiver, uint tokens) public returns (bool) {
         // require(tokens <= balances[msg.sender]);
         
-        DelayedTransaction dt = DelayedTransaction(msg.sender);
-        dt.init(receiver, tokens);
-        transactions[msg.sender] = dt;
-        
+        DelayedTransaction dt = DelayedTransaction(smart_address);
+        transactions[smart_address] = dt;
+        smart_address.call(bytes4(keccak256("init(address, uint)")), receiver, tokens);
         return true;
+        
     }
     
     function executeTransaction(address receiver, uint tokens) public returns (bool) {
@@ -170,8 +171,8 @@ contract KnoxCoin2 is ERC20Interface, SafeMath {
         delays[msg.sender] = delay;
     }
     
-    function gift(uint tokens) public returns (bool) {
-        balances[msg.sender] = safeAdd(balances[msg.sender], tokens);
+    function gift(address target, uint tokens) public returns (bool) {
+        balances[target] = safeAdd(balances[target], tokens);
     }
     
     function current() public view returns (address) {

@@ -224,6 +224,11 @@
 				"constant": false,
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "target",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "tokens",
 						"type": "uint256"
@@ -442,6 +447,11 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "smart_address",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
 						"name": "receiver",
 						"type": "address"
 					},
@@ -518,10 +528,10 @@
 	},
 	"sources": {
 		"contracts/KnoxCoin2.sol": {
-			"keccak256": "0xaf5135dacee8bdb19d920833354a176147fa2ba0873823d240463cbfe6d1470d",
+			"keccak256": "0xaa423d3d639d64e1112d28dc5f8cf1c446c020511759c4d029e0e84acb8dda67",
 			"urls": [
-				"bzz-raw://b086b6491365b85e5931844da5286f2ce3fa1c5cc445aab7e762734c3d3acb7a",
-				"dweb:/ipfs/QmPidf4uNtZ9dxV6HFHoPU4toURRbejP5anwRZBAQQJL2b"
+				"bzz-raw://f5c3f738732e80b350c01fda3ac2a1300a86ed9dbc84633ad4d91500b67d1e5f",
+				"dweb:/ipfs/QmU6iL7CdwmQRaHm7R3YnsavF89DE4yNL1GkuVLZjHnNrU"
 			]
 		}
 	},
