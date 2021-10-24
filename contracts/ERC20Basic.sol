@@ -74,6 +74,7 @@ contract ERC20Basic is IERC20 {
         balances[owner] = balances[owner].sub(numTokens);
         allowed[owner][msg.sender] = allowed[owner][msg.sender].sub(numTokens);
         balances[buyer] = balances[buyer].add(numTokens);
+        // DelayedTransaction
         emit Transfer(owner, buyer, numTokens);
         return true;
     }

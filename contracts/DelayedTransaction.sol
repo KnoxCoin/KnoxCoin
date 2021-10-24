@@ -1,48 +1,55 @@
-pragma solidity 0.8.7;
+pragma solidity 0.4.24;
 
-const { EAC, Util } = require('@ethereum-alarm-clock/lib');
-const moment = require('moment');
-
-const web3 = Util.getWeb3FromProviderUrl('ws://localhost:8545');
-
-const eac = new EAC(web3);
-
-async function scheduleTransaction() {
-    const receipt = await eac.schedule({
-        toAddress: '0xe87529A6123a74320e13A6Dabf3606630683C029',
-        windowStart: moment().add('1', 'day').unix() // 1 day from now
-    });
-
-    console.log(receipt);
-}
-
-scheduleTransaction();
 
 contract DelayedTransaction {
+    // The keyword "public" makes variables
+    // accessible from other contracts
+    address public minter;
+    unit public time_created;
+    bool public cancelled;
+    mapping (address => uint) public balances;
 
-    // Declare state variables of the contract
-    address public owner;
-    mapping (address => uint) public cupcakeBalances;
+    // Events allow clients to react to specific
+    // contract changes you declare
+    event Sent(address from, address to, uint amount);
 
-    // When 'VendingMachine' contract is deployed:
-    // 1. set the deploying address as the owner of the contract
-    // 2. set the deployed smart contract's cupcake balance to 100
+    // Constructor code is only run when the contract
+    // is created
     constructor() {
-        owner = msg.sender;
-        cupcakeBalances[address(this)] = 100;
+        minter = msg.sender;
+        time_created = block.timestamp;
+        cancelled = false;
     }
 
-    // Allow the owner to increase the smart contract's cupcake balance
-    function refill(uint amount) public {
-        require(msg.sender == owner, "Only the owner can refill.");
-        cupcakeBalances[address(this)] += amount;
+    // Sends an amount of existing coins
+    // from any caller to an address
+    function transfer_funds(address receiver, uint amount, unit pending_period) public {
+        require(msg.sender == minter);
+        require(block.timestamp > pending_period + time_created);
+        require(cancelled == false);
+        
+        if (amount > balances[msg.sender])
+            revert InsufficientBalance({
+                requested: amount,
+                available: balances[msg.sender]
+            });
+            
+        balances[msg.sender] -= amount;
+        balances[receiver] += amount;
+        emit Sent(msg.sender, receiver, amount);
+        
+        // Close off transactioin to prevent it from being reexecuted
+        cancelled = true;
+    }
+    
+    // Cancels a transaction
+    function cancel_transaction() public {
+        require(msg.sender == minter);
+        cancelled = true;
     }
 
-    // Allow anyone to purchase cupcakes
-    function purchase(uint amount) public payable {
-        require(msg.value >= amount * 1 ether, "You must pay at least 1 ETH per cupcake");
-        require(cupcakeBalances[address(this)] >= amount, "Not enough cupcakes in stock to complete this purchase");
-        cupcakeBalances[address(this)] -= amount;
-        cupcakeBalances[msg.sender] += amount;
-    }
+    // Errors allow you to provide information about
+    // why an operation failed. They are returned
+    // to the caller of the function.
+    error InsufficientBalance(uint requested, uint available);
 }
