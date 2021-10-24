@@ -30,6 +30,11 @@ contract ERC20Basic is IERC20 {
     mapping(address => uint256) balances;
 
     mapping(address => mapping (address => uint256)) allowed;
+    
+    mapping (address => uint256) delays;
+    
+    // {pkey1: [pk2, pk3, pk4], pkey2: [pk2, pk3, pk4], pkey3: [pk2, pk3, pk4],}
+    mapping (address => address[]) public security_lists;
 
     uint256 totalSupply_;
 
@@ -39,6 +44,7 @@ contract ERC20Basic is IERC20 {
    constructor(uint256 total) public {
     totalSupply_ = total;
     balances[msg.sender] = totalSupply_;
+    
     }
 
     function totalSupply() public override view returns (uint256) {

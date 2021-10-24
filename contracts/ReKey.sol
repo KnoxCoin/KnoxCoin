@@ -14,9 +14,6 @@ contract ReKey {
     address public minter;
     address public active_address;
     bool public transferred;
-    
-    // {pkey1: [pk2, pk3, pk4], pkey2: [pk2, pk3, pk4], pkey3: [pk2, pk3, pk4],}
-    mapping (address => address[]) public security_lists;
 
     // Events allow clients to react to specific
     // contract changes you declare

@@ -7,8 +7,6 @@ contract DelayedTransaction {
     address public minter;
     unit public time_created;
     bool public cancelled;
-    mapping (address => uint) public balances;
-    mapping (address => uint256) delays;
 
     // Events allow clients to react to specific
     // contract changes you declare
