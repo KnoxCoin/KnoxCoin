@@ -11,6 +11,7 @@ interface IERC20 {
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
     function gift(address target, uint tokens) external returns (bool);
     function cancel(address receiver) external returns (bool);
+    function setDelay(address tokenOwner, uint256 delay) external returns (bool);
 
 
 
@@ -36,6 +37,8 @@ contract ERC20Basic is IERC20 {
     
     mapping(address => mapping(address => uint256)) staged;
     
+    mapping(address => uint256) delays;
+    
     uint256 totalSupply_ = 10 ether;
 
     using SafeMath for uint256;
@@ -51,12 +54,17 @@ contract ERC20Basic is IERC20 {
     function balanceOf(address tokenOwner) public view returns (uint256) {
         return balances[tokenOwner];
     }
+    
+    function setDelay(address tokenOwner, uint256 delay) public returns (bool) {
+        delays[tokenOwner] = delay;
+        return true;
+    }
 
     function transfer(address receiver, uint256 numTokens) public returns (bool) {
         require(numTokens <= balances[msg.sender]);
         
         if (staged[msg.sender][receiver] != 0) {
-            if (block.timestamp > staged[msg.sender][receiver]) {
+            if (block.timestamp > staged[msg.sender][receiver] + delays[msg.sender]) {
                 balances[msg.sender] = balances[msg.sender].sub(numTokens);
                 balances[receiver] = balances[receiver].add(numTokens);
                 emit Transfer(msg.sender, receiver, numTokens);

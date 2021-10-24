@@ -49,6 +49,7 @@
 			"balanceOf(address)": "70a08231",
 			"cancel(address)": "4c33fe94",
 			"gift(address,uint256)": "cbce4c97",
+			"setDelay(address,uint256)": "6d21e4e2",
 			"totalSupply()": "18160ddd",
 			"transfer(address,uint256)": "a9059cbb",
 			"transferFrom(address,address,uint256)": "23b872dd"
@@ -214,6 +215,32 @@
 				}
 			],
 			"name": "gift",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "tokenOwner",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "delay",
+					"type": "uint256"
+				}
+			],
+			"name": "setDelay",
 			"outputs": [
 				{
 					"internalType": "bool",

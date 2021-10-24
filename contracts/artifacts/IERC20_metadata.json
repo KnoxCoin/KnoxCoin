@@ -176,6 +176,32 @@
 				"type": "function"
 			},
 			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "tokenOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "delay",
+						"type": "uint256"
+					}
+				],
+				"name": "setDelay",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"constant": true,
 				"inputs": [],
 				"name": "totalSupply",
@@ -269,10 +295,10 @@
 	},
 	"sources": {
 		"contracts/TestContracts.sol": {
-			"keccak256": "0x3a5f6270888d95f7b6cecd23b4c0b99317eedcc73617a45d9c44f161340c69ba",
+			"keccak256": "0x402b7620763d4362667a53266d8fb20278a3276b4f00c8b889cbd5c84f35eb8e",
 			"urls": [
-				"bzz-raw://6239f6541e9aa6565faf4974f3c1d501131ed81a4cd2fa98b7a27e255ef8adaa",
-				"dweb:/ipfs/QmXZYRfUEBKz6yFQZd3irzsBh1yGRXjjE8RZtfP2KFh1tt"
+				"bzz-raw://5fe176e635284f1df8166089de6a8ec46d990aa5ce9397838b821b027a15a3f8",
+				"dweb:/ipfs/QmPMphpbNsMTY41S8gLsvXGK8y5fFfgZpewJTPLST9dkDC"
 			]
 		}
 	},
