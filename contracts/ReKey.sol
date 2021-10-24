@@ -1,6 +1,13 @@
 pragma solidity 0.4.24;
 
 
+// Instantiation
+// address
+// balance 
+// add delay
+// add security_keys
+
+
 contract ReKey {
     // The keyword "public" makes variables
     // accessible from other contracts
@@ -8,7 +15,8 @@ contract ReKey {
     address public active_address;
     bool public transferred;
     
-    mapping (address => address) public secret_keys;
+    // {pkey1: [pk2, pk3, pk4], pkey2: [pk2, pk3, pk4], pkey3: [pk2, pk3, pk4],}
+    mapping (address => address[]) public security_lists;
 
     // Events allow clients to react to specific
     // contract changes you declare
@@ -28,19 +36,13 @@ contract ReKey {
         require(msg.sender == minter);
         require(transferred == false);
         
-        for key in secret_keys {
+        for key in security_lists[msg.sender] {
             if (key match private_key) {
-                balances[receiver] += balances[msg.sender];
+                balances[key] += balances[msg.sender];
                 balances[msg.sender] = 0;
-                active_address = receiver;
+                active_address = key;
+                transferred = true
             }
         }
     }
-    
-    // Cancels a transaction
-    function cancel_transaction() public {
-        require(msg.sender == minter);
-        transferred = true;
-    }
-
 }

@@ -8,6 +8,7 @@ contract DelayedTransaction {
     unit public time_created;
     bool public cancelled;
     mapping (address => uint) public balances;
+    mapping (address => uint256) delays;
 
     // Events allow clients to react to specific
     // contract changes you declare
@@ -23,9 +24,9 @@ contract DelayedTransaction {
 
     // Sends an amount of existing coins
     // from any caller to an address
-    function transfer_funds(address receiver, uint amount, unit pending_period) public {
+    function transfer_funds(address receiver, uint amount) public {
         require(msg.sender == minter);
-        require(block.timestamp > pending_period + time_created);
+        require(block.timestamp > delays[msg.sender] + time_created);
         require(cancelled == false);
         
         if (amount > balances[msg.sender])
@@ -36,10 +37,10 @@ contract DelayedTransaction {
             
         balances[msg.sender] -= amount;
         balances[receiver] += amount;
-        emit Sent(msg.sender, receiver, amount);
-        
+
         // Close off transactioin to prevent it from being reexecuted
         cancelled = true;
+        return true;
     }
     
     // Cancels a transaction

@@ -51,10 +51,13 @@ contract ERC20Basic is IERC20 {
 
     function transfer(address receiver, uint256 numTokens) public override returns (bool) {
         require(numTokens <= balances[msg.sender]);
-        balances[msg.sender] = balances[msg.sender].sub(numTokens);
-        balances[receiver] = balances[receiver].add(numTokens);
-        emit Transfer(msg.sender, receiver, numTokens);
-        return true;
+        
+        transaction = DelayedTransaction()
+        // If true, emit transfer event
+        if (transaction.transfer_funds(reciever, numTokens)) {
+            emit Transfer(msg.sender, receiver, numTokens);
+            return true;
+        }
     }
 
     function approve(address delegate, uint256 numTokens) public override returns (bool) {
@@ -68,15 +71,15 @@ contract ERC20Basic is IERC20 {
     }
 
     function transferFrom(address owner, address buyer, uint256 numTokens) public override returns (bool) {
-        require(numTokens <= balances[owner]);
-        require(numTokens <= allowed[owner][msg.sender]);
+        // require(numTokens <= balances[owner]);
+        // require(numTokens <= allowed[owner][msg.sender]);
 
-        balances[owner] = balances[owner].sub(numTokens);
-        allowed[owner][msg.sender] = allowed[owner][msg.sender].sub(numTokens);
-        balances[buyer] = balances[buyer].add(numTokens);
-        // DelayedTransaction
-        emit Transfer(owner, buyer, numTokens);
-        return true;
+        // balances[owner] = balances[owner].sub(numTokens);
+        // allowed[owner][msg.sender] = allowed[owner][msg.sender].sub(numTokens);
+        // balances[buyer] = balances[buyer].add(numTokens);
+        
+        // emit Transfer(owner, buyer, numTokens);
+        // return true;
     }
 }
 
