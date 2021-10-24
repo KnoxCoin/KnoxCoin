@@ -20,10 +20,10 @@ interface IERC20 {
 }
 
 
-contract ERC20Basic is IERC20 {
+contract KnoxCoin is IERC20 {
 
-    string public constant name = "ERC20Basic";
-    string public constant symbol = "ERC";
+    string public constant name = "KnoxCoin";
+    string public constant symbol = "KC";
     uint8 public constant decimals = 18;
 
 
@@ -131,7 +131,7 @@ contract DEX {
     IERC20 public token;
 
     constructor() public {
-        token = new ERC20Basic();
+        token = new KnoxCoin();
     }
 
     function buy() payable public {
