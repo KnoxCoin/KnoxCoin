@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/ERC20Basic.sol": "SafeMath"
+			"contracts/KnoxCoin.sol": "SafeMath"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -32,11 +32,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/ERC20Basic.sol": {
-			"keccak256": "0x98232a1a7a1bb895d9ace3d5e91189cfc464ab1d199778d27fd9e1756c68cf66",
+		"contracts/KnoxCoin.sol": {
+			"keccak256": "0x6885837955166ca1780755b7b4b3485c98be5ab0263f8ec860ca3185a550252b",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://67df420a0c1452a60352d412df3c008c32ead30f970cb5ea8e22f1cd69b51f84",
-				"dweb:/ipfs/QmSmderhCdjrP8rTZaXe2HDakXiBUU5QNckvup4GtxG8HS"
+				"bzz-raw://b8e1f4c5e59e7aa0db412b4fce09a61c8c26521180d0802a24422de471bfcc4c",
+				"dweb:/ipfs/QmbP5fZ5GrxzkzGCd8kB2GwN3pc7HffnghPPMDuBj8rhAf"
 			]
 		}
 	},

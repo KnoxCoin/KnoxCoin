@@ -5,8 +5,11 @@ contract DelayedTransaction {
     // The keyword "public" makes variables
     // accessible from other contracts
     address public minter;
-    unit public time_created;
+    address public to_recieve;
+    uint256 public to_send;
+    uint public time_created;
     bool public cancelled;
+    
 
     // Events allow clients to react to specific
     // contract changes you declare
@@ -14,27 +17,25 @@ contract DelayedTransaction {
 
     // Constructor code is only run when the contract
     // is created
-    constructor() {
+    constructor(address receiver, uint256 amount) public {
         minter = msg.sender;
         time_created = block.timestamp;
         cancelled = false;
+        to_recieve = receiver;
+        to_send = amount;
     }
 
     // Sends an amount of existing coins
     // from any caller to an address
-    function transfer_funds(address receiver, uint amount) public {
+    function transfer_funds(address receiver, uint256 balance, uint delay) public returns (bool) {
         require(msg.sender == minter);
-        require(block.timestamp > delays[msg.sender] + time_created);
+        require(block.timestamp > delay + time_created);
         require(cancelled == false);
+        require(to_recieve == receiver);
         
-        if (amount > balances[msg.sender])
-            revert InsufficientBalance({
-                requested: amount,
-                available: balances[msg.sender]
-            });
-            
-        balances[msg.sender] -= amount;
-        balances[receiver] += amount;
+        if (to_send > balance) {
+            return false;
+        }
 
         // Close off transactioin to prevent it from being reexecuted
         cancelled = true;
@@ -46,9 +47,4 @@ contract DelayedTransaction {
         require(msg.sender == minter);
         cancelled = true;
     }
-
-    // Errors allow you to provide information about
-    // why an operation failed. They are returned
-    // to the caller of the function.
-    error InsufficientBalance(uint requested, uint available);
 }

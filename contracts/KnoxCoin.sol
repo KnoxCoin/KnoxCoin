@@ -1,4 +1,8 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
+
+// import DelayedTransaction;
+// import ReKey;
 
 interface IERC20 {
 
@@ -15,10 +19,10 @@ interface IERC20 {
 }
 
 
-contract ERC20Basic is IERC20 {
+contract KnoxCoin is IERC20 {
 
-    string public constant name = "ERC20Basic";
-    string public constant symbol = "ERC";
+    string public constant name = "KnoxCoin";
+    string public constant symbol = "KNC";
     uint8 public constant decimals = 18;
 
     event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
@@ -27,22 +31,23 @@ contract ERC20Basic is IERC20 {
     mapping(address => uint256) balances;
 
     mapping(address => mapping (address => uint256)) allowed;
-    
+    // Can set up function that does one time setup
     mapping (address => uint256) delays;
+    
+    // mapping (address => DelayedTransaction[]) transactionlist;
     
     // {pkey1: [pk2, pk3, pk4], pkey2: [pk2, pk3, pk4], pkey3: [pk2, pk3, pk4],}
     mapping (address => address[]) public security_lists;
 
-    uint256 totalSupply = 1000000000;
+    uint256 totalSupply_ = 1000000000;
 
     using SafeMath for uint256;
 
-
     constructor(uint256 total) public {
-        totalSupply = total;
-        balances[msg.sender] = totalSupply;
+        totalSupply_ = total;
+        balances[msg.sender] = totalSupply_;
         delays[msg.sender] = 0;
-        security_lists[msg.sender] = [];
+        security_lists[msg.sender] = [msg.sender];
     }
 
     function totalSupply() public override view returns (uint256) {
@@ -53,25 +58,38 @@ contract ERC20Basic is IERC20 {
         return balances[tokenOwner];
     }
 
-    function transfer(address receiver, uint256 numTokens) public override returns (bool) {
-        require(numTokens <= balances[msg.sender]);
+    // function transfer(address receiver, uint256 numTokens) public override returns (bool) {
+    //     require(numTokens <= balances[msg.sender]);
         
-        transaction = DelayedTransaction()
-        // If true, emit transfer event
-        if (transaction.transfer_funds(reciever, numTokens, delays[msg.sender])) {
-            emit Transfer(msg.sender, receiver, numTokens);
-            return true;
-        }
-    }
+    //     if (true) {
+    //         balances[msg.sender] -= numTokens;
+    //         balances[receiver] += numTokens;
+    //     }
+        
+    //     emit Transfer(msg.sender, receiver, numTokens);
+        
+    //     return true;
+    //     // transaction = DelayedTransaction();
+    //     // // If true, emit transfer event
+    //     // value = transaction.transfer_funds(reciever, numTokens, balances, delays[msg.sender]);
+    //     // if (value) {
+    //     //     emit Transfer(msg.sender, receiver, numTokens);
+    //     //     return true;
+    //     // }
+    // }
     
-    function cancel(DelayedTransaction transaction) public {
-        transaction.cancel_transaction()
-    }
+    // function execute() public {
+        
+    // }
     
-    function rekey(address key) public {
-        rekey = ReKey()
-        rekey.transfer_funds(key, security_lists[msg.sender])
-    }
+    // function cancelTransaction(DelayedTransaction transaction) public {
+    //     transaction.cancel_transaction();
+    // }
+    
+    // function rekey(address key) public {
+    //     rekey = ReKey();
+    //     rekey.transfer_funds(key, security_lists[msg.sender]);
+    // }
 
     function approve(address delegate, uint256 numTokens) public override returns (bool) {
         allowed[msg.sender][delegate] = numTokens;
@@ -84,15 +102,15 @@ contract ERC20Basic is IERC20 {
     }
 
     function transferFrom(address owner, address buyer, uint256 numTokens) public override returns (bool) {
-        // require(numTokens <= balances[owner]);
-        // require(numTokens <= allowed[owner][msg.sender]);
+        require(numTokens <= balances[owner]);
+        require(numTokens <= allowed[owner][msg.sender]);
 
-        // balances[owner] = balances[owner].sub(numTokens);
-        // allowed[owner][msg.sender] = allowed[owner][msg.sender].sub(numTokens);
-        // balances[buyer] = balances[buyer].add(numTokens);
+        balances[owner] = balances[owner].sub(numTokens);
+        allowed[owner][msg.sender] = allowed[owner][msg.sender].sub(numTokens);
+        balances[buyer] = balances[buyer].add(numTokens);
         
-        // emit Transfer(owner, buyer, numTokens);
-        // return true;
+        emit Transfer(owner, buyer, numTokens);
+        return true;
     }
 }
 

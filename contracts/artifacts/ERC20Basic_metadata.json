@@ -160,6 +160,30 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "security_lists",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "symbol",
 				"outputs": [
@@ -267,10 +291,10 @@
 	},
 	"sources": {
 		"contracts/ERC20Basic.sol": {
-			"keccak256": "0x98232a1a7a1bb895d9ace3d5e91189cfc464ab1d199778d27fd9e1756c68cf66",
+			"keccak256": "0x834a9b5687f0af64a57db1434e7e79213a55a37b92e186aeb2c312fa00777dd0",
 			"urls": [
-				"bzz-raw://67df420a0c1452a60352d412df3c008c32ead30f970cb5ea8e22f1cd69b51f84",
-				"dweb:/ipfs/QmSmderhCdjrP8rTZaXe2HDakXiBUU5QNckvup4GtxG8HS"
+				"bzz-raw://3e3be98dab5464ee393ff7e0f59a580678973c07d2d4b2a9a40dca52e3ef1d00",
+				"dweb:/ipfs/QmQAtZHSHDu4Naz87qcRPPKhdu8oMuUgzjLXEmcB63bbj3"
 			]
 		}
 	},
