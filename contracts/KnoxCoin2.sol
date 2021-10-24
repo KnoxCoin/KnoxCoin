@@ -66,8 +66,8 @@ contract DelayedTransaction {
 
     // Sends an amount of existing coins
     // from any caller to an address
-    function move_funds(uint delay, uint tokens, address receiver) public returns (bool) {
-        require(msg.sender == minter);
+    function move_funds(uint delay, uint tokens, address receiver) public returns (uint) {
+        // require(msg.sender == minter);
         // require(block.timestamp >= delay + time_created);
         // require(tokens == to_send);
         // require(receiver == to_recieve);
@@ -75,7 +75,7 @@ contract DelayedTransaction {
 
         // Close off transactioin to prevent it from being reexecuted
         cancelled = true;
-        return true;
+        return block.timestamp;
     }
     
     // Cancels a transaction
@@ -142,25 +142,23 @@ contract KnoxCoin2 is KnoxInterface, SafeMath {
     
     function transfer(address smart_address, address receiver, uint tokens) public returns (bool) {
         // require(tokens <= balances[msg.sender]);
-        
         DelayedTransaction dt = DelayedTransaction(smart_address);
         transactions[smart_address] = dt;
-        smart_address.call(abi.encodeWithSignature("init(address, uint)", receiver, tokens));
+        smart_address.delegatecall(abi.encodeWithSignature("init(address, uint)", receiver, tokens));
         return true;
-        
     }
     
     function executeTransaction(address smart_address, address receiver, uint tokens) public returns (bool) {
-        (bool success, bytes memory result) = smart_address.call(abi.encodeWithSignature("move_funds(uint, uint, address)", delays[msg.sender], tokens, receiver));
+        (bool success, bytes memory result) = smart_address.delegatecall(abi.encodeWithSignature("move_funds(uint, uint, address)", delays[msg.sender], tokens, receiver));
         // emit AddedValuesByCall(a, b, success);
-        bool valid = abi.decode(result, (bool));
-        if (valid) {
-            balances[msg.sender] = safeSub(balances[msg.sender], tokens);
-            balances[receiver] = safeAdd(balances[receiver], tokens);
-            emit Transfer(msg.sender, receiver, tokens);
-            return true;
-        }
-        return false;
+        (uint a) = abi.decode(result, (uint));
+        // if (valid == 123) {
+        //     // balances[msg.sender] = safeSub(balances[msg.sender], tokens);
+        //     // balances[receiver] = safeAdd(balances[receiver], tokens);
+        //     // emit Transfer(msg.sender, receiver, tokens);
+        //     return true;
+        // }
+        return true;
     }
     
     function cancelTransaction(address smart_address) public returns (bool) {

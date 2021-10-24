@@ -123,9 +123,9 @@
 				"name": "move_funds",
 				"outputs": [
 					{
-						"internalType": "bool",
+						"internalType": "uint256",
 						"name": "",
-						"type": "bool"
+						"type": "uint256"
 					}
 				],
 				"payable": false,
@@ -199,10 +199,10 @@
 	},
 	"sources": {
 		"contracts/KnoxCoin2.sol": {
-			"keccak256": "0x12fa5432fffff79401497e4b0f6dd0dd89624fe5dafba27ca33d2ef0b59ba1ba",
+			"keccak256": "0xe99e84fbc0b9d16dfd3f92de59cf32fc6693d858dfdb786bb5f0b74e63f9a3ff",
 			"urls": [
-				"bzz-raw://8ef13505299e8fbee9e8247b257a43eafb99ce42eeed56a6ef944dff555ac756",
-				"dweb:/ipfs/QmZrdPsptGay8CoVNZBpt7e19EDxnZEwKyLZUMJEqAo7Dd"
+				"bzz-raw://e7cdb77a437a40c5178e4ba68e357aa9bc8d3d17e35124d3c906b3f954587069",
+				"dweb:/ipfs/QmaP7DSdmz2bJQmwh4u3gPAqCRE6WHtTgVog3j7ACLbvW8"
 			]
 		}
 	},
