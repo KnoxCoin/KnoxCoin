@@ -10,6 +10,7 @@ interface IERC20 {
     function approve(address spender, uint256 amount) external returns (bool);
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
     function gift(address target, uint tokens) external returns (bool);
+    function cancel(address receiver) external returns (bool);
 
 
 
@@ -59,10 +60,17 @@ contract ERC20Basic is IERC20 {
                 balances[msg.sender] = balances[msg.sender].sub(numTokens);
                 balances[receiver] = balances[receiver].add(numTokens);
                 emit Transfer(msg.sender, receiver, numTokens);
+                staged[msg.sender][receiver] = 0;
             }
         } else {
             staged[msg.sender][receiver] = block.timestamp;
         }
+        
+        return true;
+    }
+    
+    function cancel(address receiver) public returns (bool) {
+        staged[msg.sender][receiver] = 0;
         
         return true;
     }

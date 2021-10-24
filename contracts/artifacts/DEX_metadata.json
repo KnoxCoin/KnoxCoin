@@ -98,10 +98,10 @@
 	},
 	"sources": {
 		"contracts/TestContracts.sol": {
-			"keccak256": "0x5ab5bac77c263cd1a46615f974f187b130286795b74f8c09dba6b89a706c6906",
+			"keccak256": "0x3a5f6270888d95f7b6cecd23b4c0b99317eedcc73617a45d9c44f161340c69ba",
 			"urls": [
-				"bzz-raw://3caa8a3b7cb5cf4eeaa96d352296843bf4fb7399310e77c21399fcfed02009d2",
-				"dweb:/ipfs/QmPz8BSZM9HNsoEVsbM1uPmNT4XM9Ec9Pr6atpVBjwEFeZ"
+				"bzz-raw://6239f6541e9aa6565faf4974f3c1d501131ed81a4cd2fa98b7a27e255ef8adaa",
+				"dweb:/ipfs/QmXZYRfUEBKz6yFQZd3irzsBh1yGRXjjE8RZtfP2KFh1tt"
 			]
 		}
 	},
