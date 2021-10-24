@@ -6,70 +6,87 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [
+					{
+						"internalType": "contract Storage",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "spender",
-						"type": "address"
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "a",
+						"type": "uint256"
 					},
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "value",
+						"name": "b",
 						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
 					}
 				],
-				"name": "Approval",
+				"name": "AddedValuesByCall",
 				"type": "event"
 			},
 			{
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "from",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "a",
+						"type": "uint256"
 					},
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "value",
+						"name": "b",
 						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
 					}
 				],
-				"name": "Transfer",
+				"name": "AddedValuesByDelegateCall",
 				"type": "event"
 			},
 			{
-				"constant": true,
+				"constant": false,
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "owner",
+						"name": "calculator",
 						"type": "address"
 					},
 					{
-						"internalType": "address",
-						"name": "spender",
-						"type": "address"
+						"internalType": "uint256",
+						"name": "a",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "b",
+						"type": "uint256"
 					}
 				],
-				"name": "allowance",
+				"name": "addValuesWithCall",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -78,7 +95,7 @@
 					}
 				],
 				"payable": false,
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -86,21 +103,26 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "spender",
+						"name": "calculator",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "a",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "b",
 						"type": "uint256"
 					}
 				],
-				"name": "approve",
+				"name": "addValuesWithDelegateCall",
 				"outputs": [
 					{
-						"internalType": "bool",
+						"internalType": "uint256",
 						"name": "",
-						"type": "bool"
+						"type": "uint256"
 					}
 				],
 				"payable": false,
@@ -109,14 +131,8 @@
 			},
 			{
 				"constant": true,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "account",
-						"type": "address"
-					}
-				],
-				"name": "balanceOf",
+				"inputs": [],
+				"name": "calculateResult",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -129,20 +145,45 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "target",
-						"type": "address"
-					},
+				"constant": true,
+				"inputs": [],
+				"name": "getValue",
+				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "tokens",
+						"name": "",
 						"type": "uint256"
 					}
 				],
-				"name": "gift",
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "s",
+				"outputs": [
+					{
+						"internalType": "contract Storage",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "x",
+						"type": "uint256"
+					}
+				],
+				"name": "saveValue",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -157,73 +198,16 @@
 			{
 				"constant": true,
 				"inputs": [],
-				"name": "totalSupply",
+				"name": "user",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "address",
 						"name": "",
-						"type": "uint256"
+						"type": "address"
 					}
 				],
 				"payable": false,
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "recipient",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "transfer",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "sender",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "recipient",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "transferFrom",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -236,7 +220,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TestContracts.sol": "IERC20"
+			"contracts/TestContracts.sol": "Machine"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -248,10 +232,10 @@
 	},
 	"sources": {
 		"contracts/TestContracts.sol": {
-			"keccak256": "0x5ab5bac77c263cd1a46615f974f187b130286795b74f8c09dba6b89a706c6906",
+			"keccak256": "0x42157beacf37a9fa9bfe1531b34db3a6026333f081f5acfda336a513a0f97b7c",
 			"urls": [
-				"bzz-raw://3caa8a3b7cb5cf4eeaa96d352296843bf4fb7399310e77c21399fcfed02009d2",
-				"dweb:/ipfs/QmPz8BSZM9HNsoEVsbM1uPmNT4XM9Ec9Pr6atpVBjwEFeZ"
+				"bzz-raw://7f9bba63dac94073d1b3c02af02db258b83309107f3605112dcf3c1fd76c047b",
+				"dweb:/ipfs/QmY8qbBHdsFwyCdpFp1CYJnwmtAKcu4BCbXZ3BHoPVofpB"
 			]
 		}
 	},

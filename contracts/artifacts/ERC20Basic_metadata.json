@@ -1,18 +1,13 @@
 {
 	"compiler": {
-		"version": "0.6.12+commit.27d51765"
+		"version": "0.5.17+commit.d19bba13"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "total",
-						"type": "uint256"
-					}
-				],
+				"inputs": [],
+				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -67,6 +62,7 @@
 				"type": "event"
 			},
 			{
+				"constant": true,
 				"inputs": [
 					{
 						"internalType": "address",
@@ -87,10 +83,12 @@
 						"type": "uint256"
 					}
 				],
+				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
 			},
 			{
+				"constant": false,
 				"inputs": [
 					{
 						"internalType": "address",
@@ -111,10 +109,12 @@
 						"type": "bool"
 					}
 				],
+				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
+				"constant": true,
 				"inputs": [
 					{
 						"internalType": "address",
@@ -130,10 +130,12 @@
 						"type": "uint256"
 					}
 				],
+				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
 			},
 			{
+				"constant": true,
 				"inputs": [],
 				"name": "decimals",
 				"outputs": [
@@ -143,10 +145,38 @@
 						"type": "uint8"
 					}
 				],
+				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
 			},
 			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "target",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokens",
+						"type": "uint256"
+					}
+				],
+				"name": "gift",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
 				"inputs": [],
 				"name": "name",
 				"outputs": [
@@ -156,34 +186,12 @@
 						"type": "string"
 					}
 				],
+				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "security_lists",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
+				"constant": true,
 				"inputs": [],
 				"name": "symbol",
 				"outputs": [
@@ -193,10 +201,12 @@
 						"type": "string"
 					}
 				],
+				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
 			},
 			{
+				"constant": true,
 				"inputs": [],
 				"name": "totalSupply",
 				"outputs": [
@@ -206,10 +216,12 @@
 						"type": "uint256"
 					}
 				],
+				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
 			},
 			{
+				"constant": false,
 				"inputs": [
 					{
 						"internalType": "address",
@@ -230,10 +242,12 @@
 						"type": "bool"
 					}
 				],
+				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
+				"constant": false,
 				"inputs": [
 					{
 						"internalType": "address",
@@ -259,30 +273,24 @@
 						"type": "bool"
 					}
 				],
+				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
 		"devdoc": {
-			"kind": "dev",
-			"methods": {},
-			"version": 1
+			"methods": {}
 		},
 		"userdoc": {
-			"kind": "user",
-			"methods": {},
-			"version": 1
+			"methods": {}
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/ERC20Basic.sol": "ERC20Basic"
+			"contracts/TestContracts.sol": "ERC20Basic"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
-		"metadata": {
-			"bytecodeHash": "ipfs"
-		},
 		"optimizer": {
 			"enabled": false,
 			"runs": 200
@@ -290,11 +298,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/ERC20Basic.sol": {
-			"keccak256": "0x834a9b5687f0af64a57db1434e7e79213a55a37b92e186aeb2c312fa00777dd0",
+		"contracts/TestContracts.sol": {
+			"keccak256": "0x5ab5bac77c263cd1a46615f974f187b130286795b74f8c09dba6b89a706c6906",
 			"urls": [
-				"bzz-raw://3e3be98dab5464ee393ff7e0f59a580678973c07d2d4b2a9a40dca52e3ef1d00",
-				"dweb:/ipfs/QmQAtZHSHDu4Naz87qcRPPKhdu8oMuUgzjLXEmcB63bbj3"
+				"bzz-raw://3caa8a3b7cb5cf4eeaa96d352296843bf4fb7399310e77c21399fcfed02009d2",
+				"dweb:/ipfs/QmPz8BSZM9HNsoEVsbM1uPmNT4XM9Ec9Pr6atpVBjwEFeZ"
 			]
 		}
 	},

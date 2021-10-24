@@ -47,6 +47,7 @@
 			"allowance(address,address)": "dd62ed3e",
 			"approve(address,uint256)": "095ea7b3",
 			"balanceOf(address)": "70a08231",
+			"gift(address,uint256)": "cbce4c97",
 			"totalSupply()": "18160ddd",
 			"transfer(address,uint256)": "a9059cbb",
 			"transferFrom(address,address,uint256)": "23b872dd"
@@ -174,6 +175,32 @@
 			],
 			"payable": false,
 			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "target",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "tokens",
+					"type": "uint256"
+				}
+			],
+			"name": "gift",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{
