@@ -47,9 +47,13 @@
 			"allowance(address,address)": "dd62ed3e",
 			"approve(address,uint256)": "095ea7b3",
 			"balanceOf(address)": "70a08231",
+			"cancelTransaction(address)": "33de96c6",
+			"current()": "9fa6a6e3",
+			"executeTransaction(address,address,uint256)": "c1416661",
 			"gift(address,uint256)": "cbce4c97",
+			"setDelay(uint256)": "e177246e",
 			"totalSupply()": "18160ddd",
-			"transfer(address,uint256)": "a9059cbb",
+			"transfer(address,address,uint256)": "beabacc8",
 			"transferFrom(address,address,uint256)": "23b872dd"
 		}
 	},
@@ -182,6 +186,73 @@
 			"inputs": [
 				{
 					"internalType": "address",
+					"name": "smart_address",
+					"type": "address"
+				}
+			],
+			"name": "cancelTransaction",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "current",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "smart_address",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "receiver",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "tokens",
+					"type": "uint256"
+				}
+			],
+			"name": "executeTransaction",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"internalType": "address",
 					"name": "target",
 					"type": "address"
 				},
@@ -192,6 +263,27 @@
 				}
 			],
 			"name": "gift",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "delay",
+					"type": "uint256"
+				}
+			],
+			"name": "setDelay",
 			"outputs": [
 				{
 					"internalType": "bool",
@@ -223,7 +315,12 @@
 			"inputs": [
 				{
 					"internalType": "address",
-					"name": "to",
+					"name": "smart_address",
+					"type": "address"
+				},
+				{
+					"internalType": "address",
+					"name": "receiver",
 					"type": "address"
 				},
 				{

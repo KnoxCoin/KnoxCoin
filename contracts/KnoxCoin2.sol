@@ -2,10 +2,10 @@
 pragma solidity ^0.5.0;
 
 // ----------------------------------------------------------------------------
-// ERC Token Standard #20 Interface
+// Knox Interface
 //
 // ----------------------------------------------------------------------------
-contract ERC20Interface {
+contract KnoxInterface {
     function totalSupply() public view returns (uint);
     function balanceOf(address tokenOwner) public view returns (uint balance);
     function allowance(address tokenOwner, address spender) public view returns (uint remaining);
@@ -86,7 +86,7 @@ contract DelayedTransaction {
 }
 
 
-contract KnoxCoin2 is ERC20Interface, SafeMath {
+contract KnoxCoin2 is KnoxInterface, SafeMath {
     string public name;
     string public symbol;
     uint8 public decimals; // 18 decimals is the strongly suggested default, avoid changing it
