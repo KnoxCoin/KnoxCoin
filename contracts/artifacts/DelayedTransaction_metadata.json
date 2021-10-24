@@ -170,9 +170,9 @@
 	},
 	"sources": {
 		"contracts/DelayedTransaction.sol": {
-			"keccak256": "0x9476fef6d975179fd2a84a972322cccd804ddf779871625e574a55e83e401ce5",
+			"keccak256": "0x768b7a767a73e6e27cb8b068fe344780029130249b9142d72ee041f7669d2afa",
 			"urls": [
-				"bzzr://7a4936690f2ddc559865596779a543f092ceb0cd3e1c84b3d3f085c2e9ea7195"
+				"bzzr://d3ba7c45fec56258e24915fea126d8c25faa465d1ae6297a96235137373ca956"
 			]
 		}
 	},

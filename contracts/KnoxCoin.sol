@@ -39,12 +39,12 @@ contract KnoxCoin is IERC20 {
     // {pkey1: [pk2, pk3, pk4], pkey2: [pk2, pk3, pk4], pkey3: [pk2, pk3, pk4],}
     mapping (address => address[]) public security_lists;
 
-    uint256 totalSupply_ = 1000000000;
+    uint256 totalSupply_;
 
     using SafeMath for uint256;
-
-    constructor(uint256 total) public {
-        totalSupply_ = total;
+    
+    constructor() public {
+        totalSupply_ = 1000000000;
         balances[msg.sender] = totalSupply_;
         delays[msg.sender] = 0;
         security_lists[msg.sender] = [msg.sender];
