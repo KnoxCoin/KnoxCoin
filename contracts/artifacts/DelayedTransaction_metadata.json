@@ -1,22 +1,89 @@
 {
 	"compiler": {
-		"version": "0.4.24+commit.e67f0147"
+		"version": "0.5.17+commit.d19bba13"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "Sent",
+				"type": "event"
+			},
+			{
+				"constant": false,
+				"inputs": [],
+				"name": "cancel_transaction",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"constant": true,
 				"inputs": [],
-				"name": "to_send",
+				"name": "cancelled",
 				"outputs": [
 					{
+						"internalType": "bool",
 						"name": "",
-						"type": "uint256"
+						"type": "bool"
 					}
 				],
 				"payable": false,
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "receiver",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "init",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -25,8 +92,55 @@
 				"name": "minter",
 				"outputs": [
 					{
+						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "delay",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokens",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "receiver",
+						"type": "address"
+					}
+				],
+				"name": "move_funds",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "time_created",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"payable": false,
@@ -39,6 +153,7 @@
 				"name": "to_recieve",
 				"outputs": [
 					{
+						"internalType": "address",
 						"name": "",
 						"type": "address"
 					}
@@ -50,9 +165,10 @@
 			{
 				"constant": true,
 				"inputs": [],
-				"name": "time_created",
+				"name": "to_send",
 				"outputs": [
 					{
+						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
 					}
@@ -60,93 +176,6 @@
 				"payable": false,
 				"stateMutability": "view",
 				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "receiver",
-						"type": "address"
-					},
-					{
-						"name": "balance",
-						"type": "uint256"
-					},
-					{
-						"name": "delay",
-						"type": "uint256"
-					}
-				],
-				"name": "transfer_funds",
-				"outputs": [
-					{
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "cancelled",
-				"outputs": [
-					{
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [],
-				"name": "cancel_transaction",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"name": "receiver",
-						"type": "address"
-					},
-					{
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"name": "from",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "Sent",
-				"type": "event"
 			}
 		],
 		"devdoc": {
@@ -158,9 +187,9 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/DelayedTransaction.sol": "DelayedTransaction"
+			"contracts/KnoxCoin2.sol": "DelayedTransaction"
 		},
-		"evmVersion": "byzantium",
+		"evmVersion": "istanbul",
 		"libraries": {},
 		"optimizer": {
 			"enabled": false,
@@ -169,10 +198,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/DelayedTransaction.sol": {
-			"keccak256": "0x768b7a767a73e6e27cb8b068fe344780029130249b9142d72ee041f7669d2afa",
+		"contracts/KnoxCoin2.sol": {
+			"keccak256": "0xaf5135dacee8bdb19d920833354a176147fa2ba0873823d240463cbfe6d1470d",
 			"urls": [
-				"bzzr://d3ba7c45fec56258e24915fea126d8c25faa465d1ae6297a96235137373ca956"
+				"bzz-raw://b086b6491365b85e5931844da5286f2ce3fa1c5cc445aab7e762734c3d3acb7a",
+				"dweb:/ipfs/QmPidf4uNtZ9dxV6HFHoPU4toURRbejP5anwRZBAQQJL2b"
 			]
 		}
 	},
