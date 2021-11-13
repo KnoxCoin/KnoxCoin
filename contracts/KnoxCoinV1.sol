@@ -18,10 +18,9 @@ interface IERC20 {
 }
 
 interface Knox {
-    function getStaged() public returns (mapping(address => mapping(uint256 => uint))));
-    function cancel(address receiver, uint256 numTokens) public returns (bool);
-    function setSecurityCodes(string[] securityCodeHashes) public returns (bool);
-    function reKey(message: string, signature: string) public returns (bool);
+    function cancel(address receiver, uint256 numTokens) external view returns (bool);
+    function setSecurityCodes(string[] calldata securityCodePublicKeys) external view returns (bool);
+    function reKey(address securityCodePublicKey, bytes calldata signature) external view returns (bool);
 }
 
 
@@ -38,7 +37,7 @@ contract KnoxCoin is IERC20, Knox {
     mapping(address => mapping (address => uint256)) allowed;
 
     // stores security keys. Initiated once, and necessarily distinct
-    mapping(address => mapping (string => bool)) securityCodes;
+    mapping(address => mapping (address => bool)) securityCodes;
     
     // stores mapping of sender -> intended recipient -> intended numTokens
     mapping(address => mapping(address => mapping(uint256 => uint))) staged;  
@@ -124,39 +123,35 @@ contract KnoxCoin is IERC20, Knox {
     }
 
     // custom (non-ERC20) functions
-    function getStaged() public returns (mapping(address => mapping(uint256 => uint)))) {
-        return staged[msg.sender];
-    }
-
     function cancel(address receiver, uint256 numTokens) public returns (bool) {
         staged[msg.sender][receiver][numTokens] = 0;
         return true;
     }
 
-    function setSecurityCodes(string[] securityCodeHashes) public returns (bool) {
+    function setSecurityCodes(string[] memory securityCodePublicKeys) public returns (bool) {
         // msg.sender must not have set up codes previously
         require(securityCodes[msg.sender] == 0);
         // must supply at least 5 securityCodeHashes
-        require(securityCodeHashes.length >= 5);
+        require(securityCodePublicKeys.length >= 5);
         // TODO: securityCodeHashes must be unique
         // TODO: securityCodeHashes must be of some valid character length, but not exceeding a valid character length (analyze for threat model)
         // TODO: securityCodeHashes array must not exceed some valid length
 
-        securityCodes[msg.sender] = securityCodeHashes;
+        securityCodes[msg.sender] = securityCodePublicKeys;
     }
 
     // When a user wishes to transfer all funds to a secure account specified by a security code, 
     //      the user should supply a message containing the public key associated with that security code
     //      and sign it using the security code. 
-    function reKey(message: string, signature: string) public returns (bool) {
+    function reKey(address securityCodePublicKey, bytes memory signature) public returns (bool) {
         // message must match a security code public key that the user has set
-        require(securityCodes[msg.sender][message] == true);
+        require(securityCodes[msg.sender][securityCodePublicKey] == true);
 
         // reconstruct public key from signature
-        address reconstructed = recoverAddress(message, signature);
+        address reconstructed = ECDSA.recoverAddress(securityCodePublicKey, signature);
 
         // public key from signature must match message (implies user owns security code (private key))
-        require(message == reconstructed);
+        require(securityCodePublicKey == reconstructed);
 
         // transfer all funds to new address denoted by security code public key
         uint256 acctSum = balances[msg.sender];
@@ -181,7 +176,11 @@ library SafeMath {
 
 library ECDSA {
     // The following functions are adapted from code written by Pavlo Horbonos
-
+    function hashMessage(bytes32 message) internal pure returns (bytes32) {
+        bytes memory prefix = "\x19Ethereum Signed Message:\n32";
+        return keccak256(abi.encodePacked(prefix, message));
+    }
+    
     function getSigner(bytes32 message, uint8 v, bytes32 r, bytes32 s) internal pure returns (address) {  
         require(uint256(s) <= 0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5D576E7357A4501DDFE92F46681B20A0, "invalid signature 's' value");
         require(v == 27 || v == 28, "invalid signature 'v' value");
