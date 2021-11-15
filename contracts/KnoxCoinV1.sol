@@ -10,7 +10,6 @@ interface IERC20 {
     function approve(address spender, uint256 amount) external returns (bool);
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
     function gift(address target, uint tokens) external returns (bool);
-    // function cancel(address receiver) external returns (bool);
     function setDelay(address tokenOwner, uint256 delay) external returns (bool);
 
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -18,14 +17,14 @@ interface IERC20 {
 }
 
 // Abstract contract (similar to interface)
-contract Knox {
+contract KnoxInterface {
     function cancel(address receiver, uint256 numTokens) public payable returns (bool);
-    function setSecurityCodes(address[] memory secureAddresses) public payable returns (bool);
+    function setSecurityCodesAndDelay(address[] memory secureAddresses, uint256 delayInMs) public payable returns (bool);
     function reKey(address securityCodePublicKey, bytes memory signature) public payable returns (bool);
 }
 
 
-contract KnoxCoin is IERC20, Knox {
+contract KnoxCoin is IERC20, KnoxInterface {
 
     string public constant name = "KnoxCoin";
     string public constant symbol = "KC";
@@ -132,11 +131,14 @@ contract KnoxCoin is IERC20, Knox {
         return true;
     }
 
-    function setSecurityCodes(address[] memory secureAddresses) public payable returns (bool) {
+    function setSecurityCodesAndDelay(address[] memory secureAddresses, uint256 delayInMs) public payable returns (bool) {
         // msg.sender must not have set up codes previously
         require(hasSetSecurityCodes[msg.sender] == false);
+        // must supply both secureAddresses and a delayInMs
+        require(secureAddresses.length > 0 && delayInMs != 0);
         // must supply at least 5 securityCodeHashes
-        require(secureAddresses.length >= 5);
+        // require(secureAddresses.length >= 5);
+        // TODO: delayInMs must be at least some minimum time
         // TODO: securityCodeHashes must be unique
         // TODO: securityCodeHashes must be of some valid character length, but not exceeding a valid character length (analyze for threat model)
         // TODO: securityCodeHashes array must not exceed some valid length
@@ -144,6 +146,7 @@ contract KnoxCoin is IERC20, Knox {
         for(uint i=0; i<secureAddresses.length; i++){
             securityCodes[msg.sender][secureAddresses[i]] = true;
         }
+        delays[msg.sender] = delayInMs;
         
         hasSetSecurityCodes[msg.sender] = true;
         return true;
@@ -245,5 +248,4 @@ contract DEX {
         msg.sender.transfer(amount);
         emit Sold(amount);
     }
-
 }
