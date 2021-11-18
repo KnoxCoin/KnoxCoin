@@ -141,6 +141,11 @@
 						"internalType": "address",
 						"name": "receiver",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "numTokens",
+						"type": "uint256"
 					}
 				],
 				"name": "cancel",
@@ -151,8 +156,8 @@
 						"type": "bool"
 					}
 				],
-				"payable": false,
-				"stateMutability": "nonpayable",
+				"payable": true,
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -216,6 +221,27 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "relatedPublicKey",
+						"type": "address"
+					}
+				],
+				"name": "reKey",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": true,
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "tokenOwner",
 						"type": "address"
 					},
@@ -235,6 +261,32 @@
 				],
 				"payable": false,
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "secureAddresses",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "delayInMs",
+						"type": "uint256"
+					}
+				],
+				"name": "setSecurityCodesAndDelay",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": true,
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -334,7 +386,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TestContracts.sol": "KnoxCoin"
+			"contracts/KnoxCoinV1.sol": "KnoxCoin"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -345,11 +397,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/TestContracts.sol": {
-			"keccak256": "0xbca45aedb8916209e24be478acb9f408cc19c73f4d49e9cb7a9206b4ddb271ca",
+		"contracts/KnoxCoinV1.sol": {
+			"keccak256": "0xad680c632621fa4682650e282d38ea8dede38025809ca7916d376de8933e5d22",
 			"urls": [
-				"bzz-raw://beee331a6ba9e8671270a0e985977bfe6fc1b4de5ddd067e7974ae5e2ceef1b9",
-				"dweb:/ipfs/QmYC8vmL8UTFkJafGoDpewvH4wNyueYBMdMY6416BTgp4z"
+				"bzz-raw://0be183328c6cda36b7ed8607ccbab34621ab36c9dbb1a9acd5cd05052d191f63",
+				"dweb:/ipfs/Qmf7AhtigiDwwjoYMrptZWtZapKwYFsGvePG3KcV1T5Axv"
 			]
 		}
 	},

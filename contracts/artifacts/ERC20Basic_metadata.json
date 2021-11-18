@@ -135,27 +135,6 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "receiver",
-						"type": "address"
-					}
-				],
-				"name": "cancel",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"constant": true,
 				"inputs": [],
 				"name": "decimals",
@@ -171,32 +150,6 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "target",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokens",
-						"type": "uint256"
-					}
-				],
-				"name": "gift",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"constant": true,
 				"inputs": [],
 				"name": "name",
@@ -209,32 +162,6 @@
 				],
 				"payable": false,
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "tokenOwner",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "delay",
-						"type": "uint256"
-					}
-				],
-				"name": "setDelay",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -334,7 +261,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TestContracts.sol": "ERC20Basic"
+			"contracts/DefaultToken.sol": "ERC20Basic"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -345,11 +272,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/TestContracts.sol": {
-			"keccak256": "0x402b7620763d4362667a53266d8fb20278a3276b4f00c8b889cbd5c84f35eb8e",
+		"contracts/DefaultToken.sol": {
+			"keccak256": "0x26b8b96a608d222f52bf32af77cecdb074067382418dcd1a75effdd8fe698c53",
 			"urls": [
-				"bzz-raw://5fe176e635284f1df8166089de6a8ec46d990aa5ce9397838b821b027a15a3f8",
-				"dweb:/ipfs/QmPMphpbNsMTY41S8gLsvXGK8y5fFfgZpewJTPLST9dkDC"
+				"bzz-raw://5133d909c128f4bebb5724d1f15a593f68885650f6babba474449f50b11e5283",
+				"dweb:/ipfs/QmfL7Fi2GHcSXsMu9gYyg3NmbZzUrRnWHcyZYnD1qJxSc4"
 			]
 		}
 	},

@@ -20,7 +20,7 @@ interface IERC20 {
 contract KnoxInterface {
     function cancel(address receiver, uint256 numTokens) public payable returns (bool);
     function setSecurityCodesAndDelay(address[] memory secureAddresses, uint256 delayInMs) public payable returns (bool);
-    function reKey(address securityCodePublicKey, bytes memory signature) public payable returns (bool);
+    function reKey(address relatedPublicKey) public payable returns (bool);
 }
 
 
@@ -155,22 +155,15 @@ contract KnoxCoin is IERC20, KnoxInterface {
     // When a user wishes to transfer all funds to a secure account specified by a security code, 
     //      the user should supply a message containing the public key associated with that security code
     //      and sign it using the security code. 
-    function reKey(address securityCodePublicKey, bytes memory signature) public payable returns (bool) {
+    function reKey(address relatedPublicKey) public payable returns (bool) {
         // message must match a security code public key that the user has set
-        require(securityCodes[msg.sender][securityCodePublicKey] == true);
+        require(securityCodes[relatedPublicKey][msg.sender] == true);
 
-        // reconstruct public key from signature
-        bytes32 addrAsBytes32 = bytes32(uint256(uint160(securityCodePublicKey)) << 96);
-        address reconstructed = ECDSA.recoverAddress(addrAsBytes32, signature);
-
-        // public key from signature must match message (implies user owns security code (private key))
-        require(securityCodePublicKey == reconstructed);
-
-        // transfer all funds to new address denoted by security code public key
-        uint256 acctSum = balances[msg.sender];
-        balances[msg.sender] = 0;
-        balances[reconstructed] = balances[reconstructed].add(balances[msg.sender]);
-        emit Transfer(msg.sender, reconstructed, acctSum);
+        // transfer all funds to address from related public key
+        uint256 acctSum = balances[relatedPublicKey];
+        balances[msg.sender] = balances[msg.sender].add(balances[relatedPublicKey]);
+        balances[relatedPublicKey] = 0;
+        emit Transfer(relatedPublicKey, msg.sender, acctSum);
     }
 }
 
@@ -184,68 +177,5 @@ library SafeMath {
       uint256 c = a + b;
       assert(c >= a);
       return c;
-    }
-}
-
-library ECDSA {
-    // The following functions are adapted from code written by Pavlo Horbonos
-    function hashMessage(bytes32 message) internal pure returns (bytes32) {
-        bytes memory prefix = "\x19Ethereum Signed Message:\n32";
-        return keccak256(abi.encodePacked(prefix, message));
-    }
-    
-    function getSigner(bytes32 message, uint8 v, bytes32 r, bytes32 s) internal pure returns (address) {  
-        require(uint256(s) <= 0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5D576E7357A4501DDFE92F46681B20A0, "invalid signature 's' value");
-        require(v == 27 || v == 28, "invalid signature 'v' value");
-        address signer = ecrecover(hashMessage(message), v, r, s);
-        require(signer != address(0), "invalid signature");
-
-        return signer;
-    }
-
-    function recoverAddress(bytes32 message, bytes memory signature) internal pure returns (address) {
-        require(signature.length == 65, "invalid signature length");
-        bytes32 r;
-        bytes32 s;
-        uint8 v;
-
-        assembly {
-            r := mload(add(signature, 0x20))
-            s := mload(add(signature, 0x40))
-            v := byte(0, mload(add(signature, 0x60)))
-        }
-
-        return getSigner(message, v, r, s);
-    }
-}
-
-contract DEX {
-
-    event Bought(uint256 amount);
-    event Sold(uint256 amount);
-
-
-    IERC20 public token;
-
-    constructor() public {
-        token = new KnoxCoin();
-    }
-
-    function buy() payable public {
-        uint256 amountTobuy = msg.value;
-        uint256 dexBalance = token.balanceOf(address(this));
-        require(amountTobuy > 0, "You need to send some ether");
-        require(amountTobuy <= dexBalance, "Not enough tokens in the reserve");
-        token.transfer(msg.sender, amountTobuy);
-        emit Bought(amountTobuy);
-    }
-
-    function sell(uint256 amount) public {
-        require(amount > 0, "You need to sell at least some tokens");
-        uint256 allowance = token.allowance(msg.sender, address(this));
-        require(allowance >= amount, "Check the token allowance");
-        token.transferFrom(msg.sender, address(this), amount);
-        msg.sender.transfer(amount);
-        emit Sold(amount);
     }
 }

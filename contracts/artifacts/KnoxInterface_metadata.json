@@ -6,172 +6,8 @@
 	"output": {
 		"abi": [
 			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "tokenOwner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "spender",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "tokens",
-						"type": "uint256"
-					}
-				],
-				"name": "Approval",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "from",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "tokens",
-						"type": "uint256"
-					}
-				],
-				"name": "Transfer",
-				"type": "event"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "tokenOwner",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "spender",
-						"type": "address"
-					}
-				],
-				"name": "allowance",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "remaining",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"constant": false,
 				"inputs": [
-					{
-						"internalType": "address",
-						"name": "spender",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokens",
-						"type": "uint256"
-					}
-				],
-				"name": "approve",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "success",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "tokenOwner",
-						"type": "address"
-					}
-				],
-				"name": "balanceOf",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "balance",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "smart_address",
-						"type": "address"
-					}
-				],
-				"name": "cancelTransaction",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "current",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "smart_address",
-						"type": "address"
-					},
 					{
 						"internalType": "address",
 						"name": "receiver",
@@ -179,11 +15,11 @@
 					},
 					{
 						"internalType": "uint256",
-						"name": "tokens",
+						"name": "numTokens",
 						"type": "uint256"
 					}
 				],
-				"name": "executeTransaction",
+				"name": "cancel",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -191,8 +27,8 @@
 						"type": "bool"
 					}
 				],
-				"payable": false,
-				"stateMutability": "nonpayable",
+				"payable": true,
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -200,16 +36,11 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "target",
+						"name": "relatedPublicKey",
 						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokens",
-						"type": "uint256"
 					}
 				],
-				"name": "gift",
+				"name": "reKey",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -217,20 +48,25 @@
 						"type": "bool"
 					}
 				],
-				"payable": false,
-				"stateMutability": "nonpayable",
+				"payable": true,
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
 				"constant": false,
 				"inputs": [
 					{
+						"internalType": "address[]",
+						"name": "secureAddresses",
+						"type": "address[]"
+					},
+					{
 						"internalType": "uint256",
-						"name": "delay",
+						"name": "delayInMs",
 						"type": "uint256"
 					}
 				],
-				"name": "setDelay",
+				"name": "setSecurityCodesAndDelay",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -238,85 +74,8 @@
 						"type": "bool"
 					}
 				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
-				"name": "totalSupply",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "smart_address",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "receiver",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokens",
-						"type": "uint256"
-					}
-				],
-				"name": "transfer",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "success",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "from",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokens",
-						"type": "uint256"
-					}
-				],
-				"name": "transferFrom",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "success",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
+				"payable": true,
+				"stateMutability": "payable",
 				"type": "function"
 			}
 		],
@@ -329,7 +88,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/KnoxCoin2.sol": "KnoxInterface"
+			"contracts/KnoxCoinV1.sol": "KnoxInterface"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -340,11 +99,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/KnoxCoin2.sol": {
-			"keccak256": "0xe99e84fbc0b9d16dfd3f92de59cf32fc6693d858dfdb786bb5f0b74e63f9a3ff",
+		"contracts/KnoxCoinV1.sol": {
+			"keccak256": "0xad680c632621fa4682650e282d38ea8dede38025809ca7916d376de8933e5d22",
 			"urls": [
-				"bzz-raw://e7cdb77a437a40c5178e4ba68e357aa9bc8d3d17e35124d3c906b3f954587069",
-				"dweb:/ipfs/QmaP7DSdmz2bJQmwh4u3gPAqCRE6WHtTgVog3j7ACLbvW8"
+				"bzz-raw://0be183328c6cda36b7ed8607ccbab34621ab36c9dbb1a9acd5cd05052d191f63",
+				"dweb:/ipfs/Qmf7AhtigiDwwjoYMrptZWtZapKwYFsGvePG3KcV1T5Axv"
 			]
 		}
 	},

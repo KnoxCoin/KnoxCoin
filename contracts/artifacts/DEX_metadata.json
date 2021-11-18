@@ -86,7 +86,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/TestContracts.sol": "DEX"
+			"contracts/KnoxCoinV1.sol": "DEX"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -97,11 +97,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/TestContracts.sol": {
-			"keccak256": "0xbca45aedb8916209e24be478acb9f408cc19c73f4d49e9cb7a9206b4ddb271ca",
+		"contracts/KnoxCoinV1.sol": {
+			"keccak256": "0xe553a2c289c8c610d3459d9845b82653ea234e531978a8ff4292a21274e27b8b",
 			"urls": [
-				"bzz-raw://beee331a6ba9e8671270a0e985977bfe6fc1b4de5ddd067e7974ae5e2ceef1b9",
-				"dweb:/ipfs/QmYC8vmL8UTFkJafGoDpewvH4wNyueYBMdMY6416BTgp4z"
+				"bzz-raw://c4bfc4a076b632571bc2c480d034fb5d833172c1eb619aa3e82d8f48096a285b",
+				"dweb:/ipfs/Qmd5RJLeiFXibvsKtBdF4zpQZ29wbX6KHRqPCpgLm8ghJX"
 			]
 		}
 	},

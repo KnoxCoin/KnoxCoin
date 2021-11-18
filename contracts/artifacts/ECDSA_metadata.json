@@ -14,7 +14,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/KnoxCoinV1.sol": "SafeMath"
+			"contracts/KnoxCoinV1.sol": "ECDSA"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -26,10 +26,10 @@
 	},
 	"sources": {
 		"contracts/KnoxCoinV1.sol": {
-			"keccak256": "0xad680c632621fa4682650e282d38ea8dede38025809ca7916d376de8933e5d22",
+			"keccak256": "0xe553a2c289c8c610d3459d9845b82653ea234e531978a8ff4292a21274e27b8b",
 			"urls": [
-				"bzz-raw://0be183328c6cda36b7ed8607ccbab34621ab36c9dbb1a9acd5cd05052d191f63",
-				"dweb:/ipfs/Qmf7AhtigiDwwjoYMrptZWtZapKwYFsGvePG3KcV1T5Axv"
+				"bzz-raw://c4bfc4a076b632571bc2c480d034fb5d833172c1eb619aa3e82d8f48096a285b",
+				"dweb:/ipfs/Qmd5RJLeiFXibvsKtBdF4zpQZ29wbX6KHRqPCpgLm8ghJX"
 			]
 		}
 	},
